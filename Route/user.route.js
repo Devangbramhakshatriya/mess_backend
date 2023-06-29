@@ -5,6 +5,6 @@ const user = express.Router()
 user.post('/register', register)
 user.post('/login', login)
 user.get('/getuser', auth, getUser)
-user.get('/:id', getSingleUser)
 user.get('/allusers', getAllUsers)
+user.get('/:id', getSingleUser)
 module.exports = { user }
