@@ -7,4 +7,5 @@ user.post('/login', login)
 user.get('/getuser', auth, getUser)
 user.get('/allusers', getAllUsers)
 user.get('/:id', getSingleUser)
+user.patch('/updateuser/:id',updateUser)
 module.exports = { user }

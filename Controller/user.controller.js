@@ -70,6 +70,17 @@ const getSingleUser = async (req, res) => {
     }
 }
 
+const updateUser=async (req,res)=>{
+    const { id } = req.params
+    const payload=req.body
+    try {
+        const user = await UserModel.findByIdAndUpdate({ _id: id },payload)
+        res.status(200).send({ msg:"user Updated" })
+    } catch (err) {
+        res.status(400).send({ err: err.message })
+    }
+}
+
 const getAllUsers = async (req, res) => {
     try {
         const users = await UserModel.find()
@@ -78,4 +89,4 @@ const getAllUsers = async (req, res) => {
         res.status(400).send({ err: err.message })
     }
 }
-module.exports = { register, login, getUser, getAllUsers, getSingleUser}
+module.exports = { register, login, getUser, getAllUsers, getSingleUser, updateUser}
