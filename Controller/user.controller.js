@@ -59,6 +59,17 @@ const getUser = async (req, res) => {
     }
 }
 
+const getSingleUser = async (req, res) => {
+    const { id } = req.params
+    console.log(id)
+    try {
+        const user = await UserModel.findOne({ _id: id })
+        res.status(200).send({ user })
+    } catch (err) {
+        res.status(400).send({ err: err.message })
+    }
+}
+
 const getAllUsers = async (req, res) => {
     try {
         const users = await UserModel.find()
@@ -67,4 +78,4 @@ const getAllUsers = async (req, res) => {
         res.status(400).send({ err: err.message })
     }
 }
-module.exports = { register, login, getUser, getAllUsers}
+module.exports = { register, login, getUser, getAllUsers, getSingleUser}

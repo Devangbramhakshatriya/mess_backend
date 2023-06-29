@@ -4,6 +4,8 @@ const userSchema=mongoose.Schema({
     lastName:String,
     mobileNumber:Number,
     password:String,
+    diposite:Number,
+    dipositeStatus:String
 })
 
 const UserModel=mongoose.model('user',userSchema)
