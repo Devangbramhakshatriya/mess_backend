@@ -91,17 +91,41 @@ const getTodaysOrder = async (req, res) => {
 }
 
 const getTomorrowsOrder = async (req, res) => {
-    var currentDate = new Date()
-    var day = currentDate.getDate()+1
-    var month = currentDate.getMonth() + 1
-    if(month<10){
-        month=`${0}${month}`
+    // var currentDate = new Date()
+    // var day = currentDate.getDate()+1
+    // var month = currentDate.getMonth() + 1
+    // if(month<10){
+    //     month=`${0}${month}`
+    // }
+    // var year = currentDate.getFullYear()
+    // let date = `${year}-${month}-${day}`
+    // console.log(date)
+    var currentDate = new Date();
+
+    // Get tomorrow's date
+    var tomorrowDate = new Date(currentDate.getTime() + 24 * 60 * 60 * 1000);
+
+    // Check if the year has changed
+    if (tomorrowDate.getFullYear() > currentDate.getFullYear()) {
+        tomorrowDate = new Date(currentDate.getFullYear(), 0, 1); // Set to January 1st of the next year
+    } else {
+        // Check if the month has changed
+        if (tomorrowDate.getMonth() > currentDate.getMonth()) {
+            tomorrowDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1); // Set to the 1st day of the next month
+        }
     }
-    var year = currentDate.getFullYear()
-    let date = `${year}-${month}-${day}`
-    console.log(date)
+
+    // Extract the individual components of tomorrow's date
+    var year = tomorrowDate.getFullYear();
+    var month = tomorrowDate.getMonth() + 1; // Month is zero-based, so we add 1
+    var day = tomorrowDate.getDate();
+
+    // Format the date as desired (e.g., "YYYY-MM-DD")
+    var formattedDate = year + '-' + month.toString().padStart(2, '0') + '-' + day.toString().padStart(2, '0');
+
+    console.log(formattedDate);
     try {
-        const order = await orderModel.find({ date: { $gte: date } }).populate('userId')
+        const order = await orderModel.find({ date: { $gte: formattedDate } }).populate('userId')
         const userOrdersMap = new Map();
 
         order.forEach((order) => {
