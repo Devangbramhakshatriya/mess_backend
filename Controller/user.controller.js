@@ -80,6 +80,7 @@ const updateUser=async (req,res)=>{
         res.status(400).send({ err: err.message })
     }
 }
+
 const getAllUsers = async (req, res) => {
     try {
         const users = await UserModel.find()
@@ -88,4 +89,4 @@ const getAllUsers = async (req, res) => {
         res.status(400).send({ err: err.message })
     }
 }
-module.exports = { register, login, getUser, getAllUsers, getSingleUser, updateUser }
+module.exports = { register, login, getUser, getAllUsers, getSingleUser, updateUser}

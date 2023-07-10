@@ -12,17 +12,6 @@ const addOder = async (req, res) => {
     }
 }
 
-const addOderadmin = async (req, res) => {
-    const payload = req.body
-    try {
-        const order = new orderModel(payload)
-        await order.save()
-        res.status(200).send({ msg: "Order Placed Successfully" })
-    } catch (err) {
-        res.status(400).send({ err: err.message })
-    }
-}
-
 const getOrder = async (req, res) => {
     let { filter } = req.query
     let obj = {
@@ -111,7 +100,6 @@ const getTomorrowsOrder = async (req, res) => {
     // var year = currentDate.getFullYear()
     // let date = `${year}-${month}-${day}`
     // console.log(date)
-    // Get the current date
     var currentDate = new Date();
 
     // Get tomorrow's date
@@ -217,4 +205,4 @@ const deleteOrder = async (req, res) => {
     }
 }
 
-module.exports = { addOder, getOrder, deleteOrder, getSingleOrder, userOrder, getTodaysOrder, getTomorrowsOrder, getYesterdaysOrder, addOderadmin}
+module.exports = { addOder, getOrder, deleteOrder, getSingleOrder, userOrder, getTodaysOrder, getTomorrowsOrder, getYesterdaysOrder}
