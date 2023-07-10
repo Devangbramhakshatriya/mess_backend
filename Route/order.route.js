@@ -10,6 +10,6 @@ order.get("/getorder",auth,getOrder)
 order.get("/:id",auth,getSingleOrder)
 order.delete("/:orderId",deleteOrder)
 order.get("/userorder/:id",userOrder)
-order.post("/addorderadmin",addOderadmin)
+// order.post("/addorderadmin",addOderadmin)
 
 module.exports={order}
