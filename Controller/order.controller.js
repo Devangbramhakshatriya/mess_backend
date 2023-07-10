@@ -12,6 +12,17 @@ const addOder = async (req, res) => {
     }
 }
 
+const addOderadmin = async (req, res) => {
+    const payload = req.body
+    try {
+        const order = new orderModel(payload)
+        await order.save()
+        res.status(200).send({ msg: "Order Placed Successfully" })
+    } catch (err) {
+        res.status(400).send({ err: err.message })
+    }
+}
+
 const getOrder = async (req, res) => {
     let { filter } = req.query
     let obj = {
@@ -30,16 +41,6 @@ const getOrder = async (req, res) => {
 }
 
 
-const addOderadmin = async (req, res) => {
-    const payload = req.body
-    try {
-        const order = new orderModel(payload)
-        await order.save()
-        res.status(200).send({ msg: "Order Placed Successfully" })
-    } catch (err) {
-        res.status(400).send({ err: err.message })
-    }
-}
 
 const userOrder = async (req, res) => {
     const { id } = req.params
@@ -110,6 +111,7 @@ const getTomorrowsOrder = async (req, res) => {
     // var year = currentDate.getFullYear()
     // let date = `${year}-${month}-${day}`
     // console.log(date)
+    // Get the current date
     var currentDate = new Date();
 
     // Get tomorrow's date
